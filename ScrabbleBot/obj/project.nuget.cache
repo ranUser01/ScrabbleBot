@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "k/B9p4LjGqJFCU4z2gxljfJVr3kjx+cxs++c2smQKNZ674Q5tc88FfVmOSVHhBljTXZckZzDPx6kWsumLbMPfQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\wilkk\\OneDrive - ITU\\ScrabbleBot\\ScrabbleBot\\ScrabbleBot.fsproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\wilkk\\.nuget\\packages\\fparsec\\1.1.1\\fparsec.1.1.1.nupkg.sha512",
+    "C:\\Users\\wilkk\\.nuget\\packages\\fsharp.core\\7.0.200\\fsharp.core.7.0.200.nupkg.sha512"
+  ],
+  "logs": []
+}

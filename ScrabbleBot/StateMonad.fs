@@ -48,13 +48,29 @@ module internal StateMonad
     let push : SM<unit> = 
         S (fun s -> Success ((), {s with vars = Map.empty :: s.vars}))
 
-    let pop : SM<unit> = failwith "Not implemented"      
+    let pop : SM<unit> = S (fun s ->
+        match s.vars with 
+        | _ :: xs -> Success ((), {s with vars = xs}) 
+        | [] -> Failure (VarNotFound "Cannot pop from an empty stack")
+        ) ;;
 
-    let wordLength : SM<int> = failwith "Not implemented"      
+    let wordLength : SM<int> = S (fun s ->  Success (s.word.Length, s))   ;;
 
-    let characterValue (pos : int) : SM<char> = failwith "Not implemented"      
+    let characterValue (pos : int) : SM<char> = S (fun s ->
+        if s.word.Length >= 0 && pos <= s.word.Length - 1 then
+            match s.word[pos] with 
+                | character, _ -> Success (character, s)
+        else
+            Failure (IndexOutOfBounds pos)
+            ) ;;  
 
-    let pointValue (pos : int) : SM<int> = failwith "Not implemented"      
+    let pointValue (pos : int) : SM<int> = S (fun s ->
+        if pos >= 0 && pos <= s.word.Length - 1 then
+            match s.word[pos] with 
+                | _, value -> Success (value, s)
+        else
+            Failure (IndexOutOfBounds pos)
+            ) ;;     
 
     let lookup (x : string) : SM<int> = 
         let rec aux =
@@ -63,12 +79,40 @@ module internal StateMonad
             | m :: ms -> 
                 match Map.tryFind x m with
                 | Some v -> Some v
-                | None   -> aux ms
+                | None   -> aux ms 
 
         S (fun s -> 
-              match aux (s.vars) with
-              | Some v -> Success (v, s)
-              | None   -> Failure (VarNotFound x))
+                match aux (s.vars) with
+                | Some v -> Success (v, s)
+                | None   -> Failure (VarNotFound x)) ;;
 
-    let declare (var : string) : SM<unit> = failwith "Not implemented"   
-    let update (var : string) (value : int) : SM<unit> = failwith "Not implemented"      
+
+    let update (var : string) (value : int) : SM<unit> =
+        let rec aux index =
+            function
+            | []      -> None
+            | m :: ms -> 
+                match Map.tryFind var m with
+                | Some _ -> Some (index, m.Add (var, value))
+                | None   -> aux (index + 1) ms 
+
+        S (fun s -> 
+                match aux 0 (s.vars) with
+                | Some (index, updatedMap) -> 
+                let updatedMaps = List.mapi (fun i m -> if i = index then updatedMap else m) s.vars
+                Success ((), { s with vars = updatedMaps })
+                | None   -> Failure (VarNotFound var)) ;;
+
+    let declare (var : string) =
+        S (fun s ->
+            if not (s.reserved.Contains(var)) then
+                match s.vars with
+                    | [] -> Failure (VarNotFound "Stack is empty")
+                    | x :: xs -> 
+                        match Map.tryFind var x with
+                            | Some _ -> Failure (VarExists var)
+                            | None   -> Success ((), {s with vars = x.Add (var,0)::xs}) 
+            else 
+                Failure (ReservedName var)
+        )
+    ;;

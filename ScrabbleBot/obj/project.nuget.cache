@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "bBpfOHP8rEaPpj2NiN2i3qtV2PoN9+U+57Txnx/t+NWIm1DnMuOON78yDQIqIGXdRWW67QxLkRnQ/yE/cwiA/Q==",
+  "success": true,
+  "projectFilePath": "/Users/maria/Documents/GitHub/ScrabbleBot/ScrabbleBot/ScrabbleBot.fsproj",
+  "expectedPackageFiles": [
+    "/Users/maria/.nuget/packages/fparsec/1.1.1/fparsec.1.1.1.nupkg.sha512",
+    "/Users/maria/.nuget/packages/fsharp.core/7.0.200/fsharp.core.7.0.200.nupkg.sha512",
+    "/Users/maria/.nuget/packages/microsoft.netcore.app.ref/7.0.16/microsoft.netcore.app.ref.7.0.16.nupkg.sha512",
+    "/Users/maria/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.16/microsoft.aspnetcore.app.ref.7.0.16.nupkg.sha512"
+  ],
+  "logs": []
+}

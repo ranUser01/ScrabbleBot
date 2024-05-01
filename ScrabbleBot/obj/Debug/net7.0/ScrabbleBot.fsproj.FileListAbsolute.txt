@@ -1,0 +1,14 @@
+/Users/maria/Documents/GitHub/ScrabbleBot/ScrabbleBot/obj/Debug/net7.0/ScrabbleBot.fsproj.AssemblyReference.cache
+/Users/maria/Documents/GitHub/ScrabbleBot/ScrabbleBot/obj/Debug/net7.0/ScrabbleBot.AssemblyInfoInputs.cache
+/Users/maria/Documents/GitHub/ScrabbleBot/ScrabbleBot/obj/Debug/net7.0/ScrabbleBot.AssemblyInfo.fs
+/Users/maria/Documents/GitHub/ScrabbleBot/ScrabbleBot/obj/Debug/net7.0/ScrabbleBot.fsproj.CoreCompileInputs.cache
+/Users/maria/Documents/GitHub/ScrabbleBot/ScrabbleBot/obj/Debug/net7.0/ScrabbleBot.sourcelink.json
+/Users/maria/Documents/GitHub/ScrabbleBot/ScrabbleBot/bin/Debug/net7.0/ScrabbleBot.deps.json
+/Users/maria/Documents/GitHub/ScrabbleBot/ScrabbleBot/bin/Debug/net7.0/ScrabbleBot.dll
+/Users/maria/Documents/GitHub/ScrabbleBot/ScrabbleBot/bin/Debug/net7.0/ScrabbleBot.pdb
+/Users/maria/Documents/GitHub/ScrabbleBot/ScrabbleBot/bin/Debug/net7.0/ScrabbleUtil.dll
+/Users/maria/Documents/GitHub/ScrabbleBot/ScrabbleBot/obj/Debug/net7.0/Scrabble.3728C117.Up2Date
+/Users/maria/Documents/GitHub/ScrabbleBot/ScrabbleBot/obj/Debug/net7.0/ScrabbleBot.dll
+/Users/maria/Documents/GitHub/ScrabbleBot/ScrabbleBot/obj/Debug/net7.0/refint/ScrabbleBot.dll
+/Users/maria/Documents/GitHub/ScrabbleBot/ScrabbleBot/obj/Debug/net7.0/ScrabbleBot.pdb
+/Users/maria/Documents/GitHub/ScrabbleBot/ScrabbleBot/obj/Debug/net7.0/ref/ScrabbleBot.dll

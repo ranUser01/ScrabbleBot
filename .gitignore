@@ -1,9 +1,21 @@
-.vs
-*/net.7.0
-*/obj/*
-*/obj/Debug/*
-*/bin
-*/obj
-*/Debug/*
-*/Debug
-*/obj/*
+# F# compiled files
+*.dll
+*.exe
+*.pdb
+
+# Visual Studio files
+.vs/
+*.user
+*.suo
+*.userprefs
+
+# Build output
+/bin/
+/obj/
+
+.vs/
+**/bin/
+**/obj/
+*.user
+*.suo
+*.userprefs

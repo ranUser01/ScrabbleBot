@@ -19,3 +19,5 @@
 *.user
 *.suo
 *.userprefs
+
+ScrabbleBot\obj\*

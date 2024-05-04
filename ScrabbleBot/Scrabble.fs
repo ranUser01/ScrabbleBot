@@ -1,4 +1,4 @@
-﻿namespace YourClientName
+﻿namespace Bot //can I change it to anything I want? I have no idea what a project ID is
 
 open ScrabbleUtil
 open ScrabbleUtil.ServerCommunication
@@ -37,18 +37,19 @@ module RegEx =
 
 module State = 
     // Make sure to keep your state localised in this module. It makes your life a whole lot easier.
-    // Currently, it only keeps track of your hand, your player numer, your board, and your dictionary,
+    // Currently, it only keeps track of your hand, your player number, your board, and your dictionary,
     // but it could, potentially, keep track of other useful
     // information, such as number of players, player turn, etc.
 
     type state = {
         board         : Parser.board
+        used_tiles    : (uint32 * coord) list //tileid and corresponding coordinate 
         dict          : ScrabbleUtil.Dictionary.Dict
         playerNumber  : uint32
         hand          : MultiSet.MultiSet<uint32>
     }
 
-    let mkState b d pn h = {board = b; dict = d;  playerNumber = pn; hand = h }
+    let mkState b d pn h = {board = b; used_tiles = []; dict = d;  playerNumber = pn; hand = h }
 
     let board st         = st.board
     let dict st          = st.dict
@@ -63,17 +64,47 @@ module Scrabble =
         let rec aux (st : State.state) =
             Print.printHand pieces (State.hand st)
 
-            // remove the force print when you move on from manual input (or when you have learnt the format)
-            forcePrint "Input move (format '(<x-coordinate> <y-coordinate> <piece id><character><point-value> )*', note the absence of space between the last inputs)\n\n"
-            let input =  System.Console.ReadLine()
+            //remove the force print when you move on from manual input (or when you have learnt the format)
+            //forcePrint "Input move (format '(<x-coordinate> <y-coordinate> <piece id><character><point-value> )*', note the absence of space between the last inputs)\n\n"
+            let input = System.Console.ReadLine()
+            
+            // let find_moves =
+            //     
+            //     let collection : (string * uint32 list * coord) list = [] //declare an empty list to hold found word
+            //     
+            //     let rec hand_look cstring idlist cord = //subsequent lookups are in hand
+            //         
+            //         let inner_f tile =
+            //             let char, tileid = fst (Map.find (fst tile) pieces), fst tile //returns char of tile and tile id
+            //             let result = Dictionary.step char st.dict //return result of taking a step
+            //             
+            //             match result with 
+            //             | Some (false, _ ) -> hand_look (cstring + char) (tileid::idlist) cord
+            //             | Some (true, _ ) -> ((cstring + char), List.rev idlist, cord)::collection     
+            //             | None -> ()
+            //         
+            //         MultiSet.toList st.hand |> List.iter inner_f 
+            //         
+            //     let outer_f tile =
+            //         let char, tileid, cord = fst (Map.find (fst tile) pieces), fst tile, snd tile //returns char of tile and tile id
+            //         let result = Dictionary.step char st.dict //return result of taking a step
+            //         
+            //         match result with 
+            //         | Some _ -> hand_look (string char) [tileid] cord
+            //         | None -> ()
+            //         
+            //    
+            //     st.used_tiles |> List.iter outer_f   //first lookup is on the board
+            //     
+                
             let move = RegEx.parseMove input
-
+                     
             debugPrint (sprintf "Player %d -> Server:\n%A\n" (State.playerNumber st) move) // keep the debug lines. They are useful.
             send cstream (SMPlay move)
 
             let msg = recv cstream
             debugPrint (sprintf "Player %d <- Server:\n%A\n" (State.playerNumber st) move) // keep the debug lines. They are useful.
-
+            
             match msg with
             | RCM (CMPlaySuccess(ms, points, newPieces)) ->
                 (* Successful play by you. Update your state (remove old tiles, add the new ones, change turn, etc) *)

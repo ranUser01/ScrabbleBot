@@ -1,6 +1,4 @@
-﻿// Learn more about F# at http://fsharp.org
-
-let time f =
+﻿let time f =
     let start = System.DateTime.Now
     let res = f ()
     let finish = System.DateTime.Now
@@ -35,25 +33,28 @@ let main argv =
 //    let board      = ScrabbleUtil.HoleBoard.holeBoard ()
 //    let board      = ScrabbleUtil.InfiniteHoleBoard.infiniteHoleBoard ()
 
-    let words     = readLines "../../../Dictionaries/English.txt"
+    let words     = readLines "./Dictionaries/English.txt"
 
     let handSize   = 7u
     let timeout    = None
-    let tiles      = ScrabbleUtil.English.tiles 1u
+    let tiles      = ScrabbleUtil.English.tiles 1u 
     let seed       = None
     let port       = 13001
 
+
     let dictAPI =
         // Uncomment if you have implemented a dictionary. last element None if you have not implemented a GADDAG
-        // Some (Dictionary.empty, Dictionary.insert, Dictionary.step, Some Dictionary.reverse) 
-        None
-        
-    // Uncomment this line to call your client
-    // let players    = [("Your name here", YourClientName.Scrabble.startGame)]
+        Some (Dictionary.empty, Dictionary.insert, Dictionary.step, None) 
+        //None
+    
     let (dictionary, time) =
         time (fun () -> ScrabbleUtil.Dictionary.mkDict words dictAPI)
+        
+    // Uncomment this line to call your client
+    let players    = spawnMultiples "OrwellWatson" dictionary Bot.Scrabble.startGame 2
 
-    let players = spawnMultiples "OxyphenButazone" dictionary Oxyphenbutazone.Scrabble.startGame 2
+
+    //let players = spawnMultiples "OxyphenButazone" dictionary Oxyphenbutazone.Scrabble.startGame 2
 
 
     do ScrabbleServer.Comm.startGame 

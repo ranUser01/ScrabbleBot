@@ -1,6 +1,4 @@
-﻿open Dictionary 
-
-let time f =
+﻿let time f =
     let start = System.DateTime.Now
     let res = f ()
     let finish = System.DateTime.Now

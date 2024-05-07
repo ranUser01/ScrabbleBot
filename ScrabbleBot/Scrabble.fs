@@ -1,4 +1,4 @@
-﻿namespace Bot //can I change it to anything I want? I have no idea what a project ID is
+﻿namespace Bot 
 
 open ScrabbleUtil
 open ScrabbleUtil.ServerCommunication
@@ -8,6 +8,14 @@ open System.IO
 open ScrabbleUtil.DebugPrint
 
 // The RegEx module is only used to parse human input. It is not used for the final product.
+
+(* 
+Multi-player -> no
+Dictionary -> yes
+playing on all boards -> no
+parallelism -> no
+Respect the timeout flag -> no
+*)
 
 module RegEx =
     open System.Text.RegularExpressions
